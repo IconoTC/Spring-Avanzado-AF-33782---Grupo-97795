@@ -17,7 +17,7 @@ public class Dummy {
 		cadena = "";
 	}
 	
-	public Dummy(@NonNull String cadena) {
+	public Dummy(String cadena) {
 		setCadenaSegura(cadena);
 	}
 
