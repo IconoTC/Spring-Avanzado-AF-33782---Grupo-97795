@@ -54,12 +54,13 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	private ApplicationEventPublisher publisher;
-	@Autowired 
+	@Autowired(required = false) 
 	public void setPublisher(ApplicationEventPublisher publisher) {
 		this.publisher = publisher;
 	}
 
 	protected void doEvent(@NonNull String event) { 
+		if(publisher == null) return;
 		publisher.publishEvent(new GenericoEvent(getClass().getSimpleName(), event)); 
 	}
 	

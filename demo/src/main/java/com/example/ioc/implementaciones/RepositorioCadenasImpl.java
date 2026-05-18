@@ -43,13 +43,14 @@ public class RepositorioCadenasImpl implements RepositorioCadenas {
 		
 	}	
 	
-	@Autowired 
+	@Autowired(required = false) 
 	private ApplicationEventPublisher publisher;
 	public void setPublisher(ApplicationEventPublisher publisher) {
 		this.publisher = publisher;
 	}
 	protected void doEvent(@NonNull String event) { 
-		publisher.publishEvent(event); 
+		if(publisher != null)
+			publisher.publishEvent(event); 
 	}
 
 }
