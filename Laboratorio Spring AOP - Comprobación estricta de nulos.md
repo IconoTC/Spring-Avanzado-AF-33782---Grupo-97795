@@ -394,7 +394,7 @@ public class StrictNullChecksAspect {
 ## Recursos Adicionales
 
 - [Spring AOP Reference](https://docs.spring.io/spring-framework/reference/core/aop.html)
-- [AspectJ Pointcut Expressions](https://www.eclipse.org/aspectj/doc/next/progguide/semantics-pointcuts.html)
+- [AspectJ Pointcut Expressions](https://eclipse.dev/aspectj/doc/latest/progguide/progguide.html#semantics)
 - [Spring Boot Testing](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing)
 
 ---
