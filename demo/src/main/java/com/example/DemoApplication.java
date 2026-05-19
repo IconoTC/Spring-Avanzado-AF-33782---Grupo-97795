@@ -7,8 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.event.EventListener;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.annotation.Order;
 
+import com.example.ioc.GenericoEvent;
 import com.example.ioc.NotificationService;
 import com.example.ioc.Rango;
 import com.example.ioc.anotaciones.EMail;
@@ -18,8 +22,9 @@ import com.example.nulabilidad.Dummy;
 
 import lombok.extern.log4j.Log4j2;
 
-@SpringBootApplication
 @Log4j2
+@SpringBootApplication
+@EnableAspectJAutoProxy
 public class DemoApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -42,7 +47,7 @@ public class DemoApplication implements CommandLineRunner {
 		};
 	}
 	
-//	@Bean
+	@Bean
 	CommandLineRunner ioc(ServicioCadenas srv, NotificationService notify) {
 		return arg -> {
 //			NotificationService notify = new NotificationServiceImpl();
@@ -79,7 +84,7 @@ public class DemoApplication implements CommandLineRunner {
 			System.err.println(rango.toString());
 		};
 	}
-	@Bean
+//	@Bean
 	CommandLineRunner configuracionEnXML() {
 		return _ -> {
 			try (var contexto = new FileSystemXmlApplicationContext("applicationContext.xml")) {
@@ -100,5 +105,21 @@ public class DemoApplication implements CommandLineRunner {
 				((Sender) contexto.getBean("sender")).send("Hola mundo");
 			}
 		};
+	}
+	
+	@Order(1)
+	@EventListener
+	private void suscriptor(GenericoEvent event) {
+		System.err.println("Evento generico de %s: %s".formatted(event.origen(), event.carga()));
+	}
+	@Order(10)
+	@EventListener
+	private void suscriptor2(GenericoEvent event) {
+		System.err.println("Otro tratamiento de %s: %s".formatted(event.origen(), event.carga()));
+	}
+	
+	@EventListener
+	private void eventHandler(String event) {
+		System.err.println("Evento cadena: %s".formatted(event));
 	}
 }

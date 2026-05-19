@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,6 +63,11 @@ public class NotificationServiceImpl implements NotificationService {
 	protected void doEvent(@NonNull String event) { 
 		if(publisher == null) return;
 		publisher.publishEvent(new GenericoEvent(getClass().getSimpleName(), event)); 
+	}
+	
+	@EventListener
+	private void eventHandler(String event) {
+		add("Evento cadena: %s".formatted(event));
 	}
 	
 }
