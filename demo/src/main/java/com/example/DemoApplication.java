@@ -107,19 +107,20 @@ public class DemoApplication implements CommandLineRunner {
 		};
 	}
 	
-	@Order(1)
-	@EventListener
-	private void suscriptor(GenericoEvent event) {
-		System.err.println("Evento generico de %s: %s".formatted(event.origen(), event.carga()));
-	}
-	@Order(10)
-	@EventListener
-	private void suscriptor2(GenericoEvent event) {
-		System.err.println("Otro tratamiento de %s: %s".formatted(event.origen(), event.carga()));
-	}
-	
-	@EventListener
-	private void eventHandler(String event) {
-		System.err.println("Evento cadena: %s".formatted(event));
-	}
+//	@Order(1)
+//	@EventListener
+//	private void suscriptor(GenericoEvent event) {
+//		System.err.println("Evento generico de %s: %s".formatted(event.origen(), event.carga()));
+//	}
+//	@Order(10)
+//	@EventListener
+//	private void suscriptor2(GenericoEvent event) {
+//		System.err.println("Otro tratamiento de %s: %s".formatted(event.origen(), event.carga()));
+//	}
+//	
+//	@EventListener
+//	private void eventHandler(String event) {
+//		System.err.println("Evento cadena: %s".formatted(event));
+//	}
+
 }
