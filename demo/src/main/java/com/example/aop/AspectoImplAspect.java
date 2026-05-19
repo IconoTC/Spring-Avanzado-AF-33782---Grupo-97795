@@ -46,7 +46,7 @@ public class AspectoImplAspect {
 //		System.err.println(">>> La funcion '" + jp.getSignature() + "' ha devuelto " + retVal);
 //	}
 
-//	@AfterThrowing(pointcut="execution(void com.example.ioc..*.set*(..))",	throwing = "ex")
+//	@AfterThrowing(pointcut="execution(void com.example..*.set*(..))",	throwing = "ex")
 //	public void consejoDespuesDeGetPropiedad(JoinPoint jp, Throwable ex) {
 //		System.err.println(">>> El setter '" + jp.getSignature() + "' ha devuelto la excepcion " + ex.getClass().getSimpleName());
 //	}
@@ -59,20 +59,21 @@ public class AspectoImplAspect {
 //		return o;
 //	}
 
-	@Around("miPuntoDeCorte()")
-	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
+//	@Around("miPuntoDeCorte()")
+//	@Around( "execution(* com.example.ioc..*.get*())")
+//	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
 //		System.err.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
-		var o = jp.proceed();
+//		var o = jp.proceed();
 //		System.err.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
-		if(o != null ) {
+//		if(o != null ) {
 //			System.err.println(">>> Valor devuelto " + o);
-			if(o instanceof Number v) {
+//			if(o instanceof Number v) {
 //				System.err.println(">>> Valor calculado " + v.doubleValue() * 2);
-				return v.doubleValue() * 2;
-			}
-		}
-		return o;
-	}
+//				return v.doubleValue() * 2;
+//			}
+//		}
+//		return o;
+//	}
 	
 //	@Around("execution(void com.example.ioc..*.set*(String))")
 //	public void interceptaExcepcion(ProceedingJoinPoint jp) throws Throwable {

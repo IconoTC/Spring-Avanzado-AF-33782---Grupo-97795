@@ -12,6 +12,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.annotation.Order;
 
+import com.example.aop.AuthenticationService;
+import com.example.aop.introductions.Visible;
 import com.example.ioc.GenericoEvent;
 import com.example.ioc.NotificationService;
 import com.example.ioc.Rango;
@@ -36,22 +38,27 @@ public class DemoApplication implements CommandLineRunner {
 		System.err.println("Aplicacion arrancada...");
 	}
 
-	//@Bean
-	CommandLineRunner tratamientoDeNulos() {
+//	@Bean
+	CommandLineRunner tratamientoDeNulos(Dummy dummy) {
 		return arg -> {
-			var dummy = new Dummy();
+//			var dummy = new Dummy();
 			String cad = "";
-			dummy.setCadena(cad);
-//			dummy.setCadena(null);
+//			dummy.setCadena(cad);
+			try {
+//			dummy.setCadenaSegura(null);
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 			log.warn("Esto es un aviso");
 		};
 	}
 	
-	@Bean
-	CommandLineRunner ioc(ServicioCadenas srv, NotificationService notify) {
+//	@Bean
+	CommandLineRunner ioc(ServicioCadenas srv, NotificationService notify, AuthenticationService auth) {
 		return arg -> {
 //			NotificationService notify = new NotificationServiceImpl();
 //			ServicioCadenas srv = new ServicioCadenasImpl(new RepositorioCadenasImpl(new ConfiguracionImpl(notify), notify), notify);
+			auth.login();
 			srv.add("algo");
 			srv.get().forEach(notify::add);
 			IO.println("===============================>");
@@ -122,5 +129,23 @@ public class DemoApplication implements CommandLineRunner {
 //	private void eventHandler(String event) {
 //		System.err.println("Evento cadena: %s".formatted(event));
 //	}
+
+	@Bean
+	CommandLineRunner introduciones(ServicioCadenas srv, NotificationService notify, AuthenticationService auth) {
+		return arg -> {
+//			NotificationService notify = new NotificationServiceImpl();
+//			ServicioCadenas srv = new ServicioCadenasImpl(new RepositorioCadenasImpl(new ConfiguracionImpl(notify), notify), notify);
+			IO.println(srv.getClass().getCanonicalName());
+			if(srv instanceof Visible v) {
+				IO.println(v.isVisible() ? "es visible" : "es invisible");
+				v.mostrar();
+				IO.println(v.isVisible() ? "es visible" : "es invisible");
+				v.ocultar();
+				IO.println(v.isVisible() ? "es visible" : "es invisible");
+			} else {
+				IO.println("No implementa Visible");
+			}
+		};
+	}
 
 }
