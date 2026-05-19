@@ -27,9 +27,9 @@ public class DummyService {
     
     public void clearValue() {
 //    	value = null;
-    	value = alwaysNull();
+//    	value = alwaysNull();
 //    	value = self.alwaysNull();
-//      value = ((DummyService) AopContext.currentProxy()).alwaysNull(); // auto referenciado
+      value = ((DummyService) AopContext.currentProxy()).alwaysNull(); // auto referenciado
     }
 
     @NonNull 
