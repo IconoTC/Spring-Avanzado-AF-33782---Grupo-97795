@@ -14,7 +14,7 @@ public class Dummy {
 
 	
 	public Dummy() {
-		cadena = "";
+		cadena = null;
 	}
 	
 	public Dummy(String cadena) {

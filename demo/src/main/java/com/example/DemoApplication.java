@@ -37,6 +37,7 @@ public class DemoApplication implements CommandLineRunner {
 			var dummy = new Dummy();
 			String cad = "";
 			dummy.setCadena(cad);
+//			dummy.setCadena(null);
 			log.warn("Esto es un aviso");
 		};
 	}
