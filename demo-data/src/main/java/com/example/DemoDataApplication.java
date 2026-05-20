@@ -15,8 +15,10 @@ public class DemoDataApplication {
 	@Bean
 	CommandLineRunner ejempos(EjemplosDatos demos) {
 		return arg -> {
-			demos.consultas();
+//			demos.consultas();
 //			demos.actores();
+//			demos.carga();
+			demos.valida();
 		};
 	}
 
