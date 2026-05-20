@@ -1,6 +1,7 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.example.contracts.domain.repositories.ActoresRepository;
@@ -13,7 +14,13 @@ public class EjemplosDatos {
 	ActoresRepository daoActors;
 	
 	public void consultas() {
-		daoActors.findAll().forEach(IO::println);
+//		daoActors.findAll().forEach(IO::println);
+		daoActors.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P").forEach(IO::println);
+		daoActors.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName")).forEach(IO::println);
+//		daoActors.findByActorIdGreaterThanEqual(195).forEach(IO::println);
+//		daoActors.findConJPQL(195).forEach(IO::println);
+		daoActors.findConSQL(195).forEach(IO::println);
+		daoActors.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 195)).forEach(IO::println);
 	}
 	
 	public void actores() {
