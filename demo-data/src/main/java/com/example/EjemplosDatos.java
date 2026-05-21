@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.contracts.domain.repositories.ActoresRepository;
+import com.example.contracts.domain.repositories.CategoriasRepository;
 import com.example.domain.entities.Actor;
+import com.example.domain.entities.models.ActorDTO;
+import com.example.domain.entities.models.ActorShort;
+
+import tools.jackson.databind.json.JsonMapper;
 
 @Component
 public class EjemplosDatos {
@@ -16,12 +21,17 @@ public class EjemplosDatos {
 	
 	public void consultas() {
 //		daoActors.findAll().forEach(IO::println);
-		daoActors.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P").forEach(IO::println);
-		daoActors.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName")).forEach(IO::println);
-		daoActors.findByActorIdGreaterThanEqual(195).forEach(IO::println);
-		daoActors.findConJPQL(195).forEach(IO::println);
-		daoActors.findConSQL(195).forEach(IO::println);
-		daoActors.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 195)).forEach(IO::println);
+//		daoActors.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P").forEach(IO::println);
+//		daoActors.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName")).forEach(IO::println);
+//		daoActors.findByActorIdGreaterThanEqual(195).forEach(IO::println);
+//		daoActors.findConJPQL(195).forEach(IO::println);
+//		daoActors.findConSQL(195).forEach(IO::println);
+//		daoActors.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 195)).forEach(IO::println);
+//		daoActors.findByActorIdGreaterThanEqual(195).forEach(item -> IO.println(ActorDTO.from(item)));
+//		daoActors.readByActorIdGreaterThanEqual(195).forEach(IO::println);
+//		daoActors.queryByActorIdGreaterThanEqual(195).forEach(item -> IO.println("%d - %s".formatted(item.getId(), item.getNombre())));
+		daoActors.findByActorIdGreaterThanEqual(195, ActorDTO.class).forEach(IO::println);
+		daoActors.findByActorIdGreaterThanEqual(195, ActorShort.class).forEach(item -> IO.println("%d - %s".formatted(item.getId(), item.getNombre())));
 	}
 	
 //	@Transactional
@@ -67,5 +77,16 @@ public class EjemplosDatos {
 //		} else {
 			daoActors.save(actor);
 //		}
+	}
+	
+	@Autowired
+	CategoriasRepository daoCategorias;
+	
+	public void categorias() {
+		var objectMapper = new JsonMapper();
+		IO.println(objectMapper.writeValueAsString(daoCategorias.findAll()));
+//		Person person = new ObjectMapper().readValue(jsonText, Person.class);
+		var xmlMapper = new tools.jackson.dataformat.xml.XmlMapper();
+		System.out.println(xmlMapper.writeValueAsString(daoCategorias.findAll()));
 	}
 }

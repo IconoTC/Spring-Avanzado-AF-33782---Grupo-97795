@@ -18,7 +18,8 @@ public class DemoDataApplication {
 //			demos.consultas();
 //			demos.actores();
 //			demos.carga();
-			demos.valida();
+//			demos.valida();
+			demos.categorias();
 		};
 	}
 
