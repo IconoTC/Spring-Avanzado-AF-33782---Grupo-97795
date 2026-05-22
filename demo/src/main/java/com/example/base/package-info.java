@@ -1,2 +1,2 @@
 @org.jspecify.annotations.NullMarked
-package com.example.nulabilidad;
+package com.example.base;

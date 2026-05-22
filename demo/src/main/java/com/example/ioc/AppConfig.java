@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.base.DummyJSpecify;
 import com.example.ioc.anotaciones.Twit;
 import com.example.ioc.notificaciones.EMailSender;
 import com.example.ioc.notificaciones.Sender;
 import com.example.ioc.notificaciones.TwitterSender;
-import com.example.nulabilidad.Dummy;
 
 @Configuration
 public class AppConfig {
@@ -40,7 +40,7 @@ public class AppConfig {
 	}
 	
 	@Bean
-	Dummy dummy() {
-		return new Dummy();
+	DummyJSpecify dummy() {
+		return new DummyJSpecify();
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.nulabilidad;
+package com.example.base;
 
 import java.util.Optional;
 
@@ -9,15 +9,15 @@ import org.jspecify.annotations.Nullable;
 // import lombok.NonNull;
 
 // @NullMarked
-public class Dummy {
+public class DummyJSpecify {
 	@Nullable String cadena;
 
 	
-	public Dummy() {
+	public DummyJSpecify() {
 		cadena = null;
 	}
 	
-	public Dummy(String cadena) {
+	public DummyJSpecify(String cadena) {
 		setCadenaSegura(cadena);
 	}
 
